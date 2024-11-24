@@ -1,11 +1,10 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import config from "../app/config";
 
 export const errorHandler = (
-  err: Error & { statusCode?: number; error?: any },
+  err: Error & { statusCode?: number; error?: Error },
   req: Request,
-  res: Response,
-  next: NextFunction
+  res: Response
 ) => {
   const statusCode = err.statusCode || 500;
 

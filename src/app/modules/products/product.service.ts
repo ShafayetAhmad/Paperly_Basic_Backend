@@ -1,6 +1,7 @@
+import { IProduct } from "./product.interface";
 import { Product } from "./product.model";
 
-export const createProductService = async (productData: any) => {
+export const createProductService = async (productData: IProduct) => {
   const product = new Product(productData);
   return await product.save();
 };
@@ -26,7 +27,7 @@ export const getProductByIdService = async (productId: string) => {
 
 export const updateProductService = async (
   productId: string,
-  updateData: any
+  updateData: Partial<IProduct>
 ) => {
   return await Product.findByIdAndUpdate(productId, updateData, { new: true });
 };

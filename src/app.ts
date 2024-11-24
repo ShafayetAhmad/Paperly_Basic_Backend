@@ -6,7 +6,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("Welcome to Paperly Backend!");
 });
 
 export default app;

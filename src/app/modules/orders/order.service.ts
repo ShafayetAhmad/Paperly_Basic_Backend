@@ -1,7 +1,8 @@
 import { Order } from "./order.model";
 import { Product } from "../products/product.model";
+import { IOrder } from "./order.interface";
 
-export const createOrderService = async (orderData: any) => {
+export const createOrderService = async (orderData: IOrder) => {
   const { email, product: productId, quantity, totalPrice } = orderData;
 
   if (!email || !productId || !quantity || !totalPrice) {

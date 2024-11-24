@@ -15,13 +15,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
 const config_1 = __importDefault(require("./app/config"));
 const mongoose_1 = __importDefault(require("mongoose"));
+const product_route_1 = __importDefault(require("./app/modules/products/product.route"));
+const order_route_1 = __importDefault(require("./app/modules/orders/order.route"));
+const errorHandler_1 = require("./middlewares/errorHandler");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoose_1.default.connect(config_1.default.db_url);
             app_1.default.listen(config_1.default.port, () => {
-                console.log(`Example app listening on port ${config_1.default.port}`);
+                console.log(`Paperly Backend listening on port ${config_1.default.port}`);
             });
+            app_1.default.use("/api/products", product_route_1.default);
+            app_1.default.use("/api/orders", order_route_1.default);
+            app_1.default.use(errorHandler_1.errorHandler);
         }
         catch (error) {
             console.log(error.message);

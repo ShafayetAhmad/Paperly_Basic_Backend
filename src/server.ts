@@ -1,5 +1,4 @@
 import app from "./app";
-import express from "express";
 import config from "./app/config";
 
 import mongoose from "mongoose";
@@ -20,7 +19,5 @@ async function main() {
     console.log((error as Error).message);
   }
 }
-
-export const router = express.Router();
 
 main();

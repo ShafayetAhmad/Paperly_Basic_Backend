@@ -49,13 +49,15 @@ export const getProductById = async (
   try {
     const { productId } = req.params;
     const product = await getProductByIdService(productId);
-    product
-      ? res
-          .status(200)
-          .json(
-            generateResponse("Product retrieved successfully", true, product)
-          )
-      : res.status(404).json(generateResponse("Product not found", false, {}));
+    if (product) {
+      res
+        .status(200)
+        .json(
+          generateResponse("Product retrieved successfully", true, product)
+        );
+    } else {
+      res.status(404).json(generateResponse("Product not found", false, {}));
+    }
   } catch (err) {
     next(err);
   }
@@ -69,17 +71,15 @@ export const updateProduct = async (
   try {
     const { productId } = req.params;
     const updatedProduct = await updateProductService(productId, req.body);
-    updatedProduct
-      ? res
-          .status(200)
-          .json(
-            generateResponse(
-              "Product updated successfully",
-              true,
-              updatedProduct
-            )
-          )
-      : res.status(404).json(generateResponse("Product not found", false, {}));
+    if (updatedProduct) {
+      res
+        .status(200)
+        .json(
+          generateResponse("Product updated successfully", true, updatedProduct)
+        );
+    } else {
+      res.status(404).json(generateResponse("Product not found", false, {}));
+    }
   } catch (err) {
     next(err);
   }
@@ -93,11 +93,13 @@ export const deleteProduct = async (
   try {
     const { productId } = req.params;
     const deletedProduct = await deleteProductService(productId);
-    deletedProduct
-      ? res
-          .status(200)
-          .json(generateResponse("Product deleted successfully", true, {}))
-      : res.status(404).json(generateResponse("Product not found", false, {}));
+    if (deletedProduct) {
+      res
+        .status(200)
+        .json(generateResponse("Product deleted successfully", true, {}));
+    } else {
+      res.status(404).json(generateResponse("Product not found", false, {}));
+    }
   } catch (err) {
     next(err);
   }
